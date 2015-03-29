@@ -1,0 +1,132 @@
+html {
+	background-color: #eee;
+	color: #333;
+	margin:0;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 18px;
+}
+
+h1 {
+	font-size: 2rem;
+	margin: 2rem;
+	font-weight: 500;
+	color: #333;
+	text-align: center;
+}
+h2 {
+	font-size: 1.667rem;
+	margin: 1.667rem;
+	font-weight: 500;
+	color: #555;
+}
+h3 {
+	font-size: 1.389rem;
+	margin: 1.389rem;
+	font-weight: 500;
+	color: #777;
+}
+
+footer {
+	color: #666;
+	font-size: 0.8rem;
+	text-align: center;
+}
+
+.content section {
+	max-width: 1170px;
+	margin: 2rem;
+	margin-right: auto;
+	margin-left: auto;
+	background-color:#fff;
+	border: 1px solid #e0e0e0;
+}
+
+.equity-list {
+	border-top: 1px solid #a0c8ff;
+	padding: 1.25rem 1.5rem;
+}
+.equity-item {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+}
+
+.deposit {
+	color: #6aa84f;
+}
+.investment {
+	color: #3d85c6;
+}
+.withdrawl {
+	color: #cc0000;
+}
+.earmark {
+	color: #666666;
+}
+
+.field {
+	display: inline-block;
+	flex: 1;
+	padding: 0.75rem 0.5rem;
+}
+.description {
+	flex-basis: 100%;
+}
+.value {
+	text-align: right;
+}
+
+.btn-trash {
+	color: #999;
+	cursor: pointer;
+	margin-bottom: 3px;
+}
+.btn-trash:hover {
+	color: #d00;
+}
+
+.total {
+	padding: 2rem;
+	text-align: center;
+}
+
+@media (max-width: 480px) {
+	.description {
+		order: 1;
+		padding-top: 0;
+	}
+	.equity-item {
+		border-bottom: 1px dashed #ccc;
+		flex-wrap: wrap;
+	}
+	.equity-item:last-child {
+		border-bottom: none;
+	}
+}
+
+.textbox {
+	display: block;
+	font-size: 1rem;
+	background-color: rgba(0, 0, 0, 0);
+	width: 100%;
+	padding: 0.25rem 0.5rem;
+	border: none;
+	border-bottom: 1px solid transparent;
+	transition: border-color 0.12s ease-in-out 0s, box-shadow 0.12s ease-in-out 0s;
+	text-align: inherit;
+}
+.textbox:focus {
+	border-bottom: 1px solid #66afe9;
+	outline: 0px none;
+	box-shadow: 0px 8px 8px -8px rgba(102, 175, 233, 0.6);
+}
+
+.w-sizer {
+	visibility: hidden;
+	height: 0;
+	padding-bottom: 0;
+	padding-top: 0;
+	margin-bottom: 0;
+	margin-top: 0;
+	white-space: nowrap;
+}

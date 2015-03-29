@@ -1,0 +1,35 @@
+{
+  "name": "Equity",
+  "version": "1.0.0",
+  "description": "A simple web application for equity tracking",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify -t riotify app.js -o dist/app.js && cd dist &&  uglifyjs app.js -o app.min.js --source-map app.min.js.map",
+    "clean": "rm -rf dist/*",
+    "install:dev": "npm install -g browserify riot uglify-js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify -t riotify app.js -o dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dubrowgn/Equity.git"
+  },
+  "keywords": [
+    "equity",
+    "tracker"
+  ],
+  "author": "Dustin Brown <dubrowgn@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dubrowgn/Equity/issues"
+  },
+  "dependencies": {
+    "immutable": "^3.7.0",
+    "riot": "^2.0.13",
+    "underscore": "^1.8.2"
+  },
+  "devDependencies": {
+    "riotify": "0.0.9"
+  }
+}
