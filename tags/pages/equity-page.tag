@@ -1,6 +1,6 @@
 <equity-page>
 	<header>
-		<h1>Equity Tracker</h1>
+		<h1><textbox value="Equity Tracker" /></h1>
 	</header>
 	<div class="content">
 		<section>
