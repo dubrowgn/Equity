@@ -1,44 +1,70 @@
-var Http = require('http');
+'use strict';
 
-// npm install ws
-var Ws = require('ws');
+var restify = require('restify');
+var mysql = require('mysql');
+var config = require('./config/config.js');
 
-// npm install swarm
-var Swarm = require('swarm');
+// load controllers
+var appPath = __dirname + "/src/server/controllers";
+require("fs").readdirSync(appPath).forEach(function(file) {
+	require("./src/server/controllers/" + file);
+});
+var controllers = require('./src/server/controllers.js');
 
-require('./models/action.js'); // see the model definition above
-require('./models/action-list.js'); // see the model definition above
+var db = mysql.createPool(config.database);
 
-// use file storage
-var fileStorage = new Swarm.FileStorage('storage');
+function respond(req, res, next) {
+	// get controller
+	var c = controllers(req.params.item);
+	if (!c)
+		return next(new restify.NotFoundError('The specified controller was not found'));
 
-// create the server-side Swarm Host
-var swarmHost = new Swarm.Host('swarm~nodejs', 0, fileStorage);
+	// get action function
+	var a = c[req.params.action];
+	if (!c.hasOwnProperty(req.params.action) || typeof a !== 'function')
+		return next(new restify.NotFoundError('The specified action was not found'));
 
-// create and start the HTTP server
-var httpServer = Http.createServer();
-httpServer.listen(8000, function (err) {
-	if (err) {
-		console.warn('Can\'t start server. Error: ', err, err.stack);
-		return;
-	}
-	console.log('Swarm server started at port 8000');
+	// init json string
+	var json = '';
+
+	req.setEncoding('utf8');
+
+	req.on('data', function(chunk) { json += chunk; });
+
+	req.on('end', function() {
+		try{
+			var sql = a(JSON.parse(json));
+			console.log(sql);
+		}
+		catch(ex){
+			return next(ex);
+		}
+
+		// FIXME -- error validation here
+
+		db.query(sql, function(err, rows, fields) {
+			if (err) {
+				console.log(err.message);
+				return next(new restify.InternalError(err.message));
+			} // if
+
+			console.log(rows);
+			res.send(rows);
+			next();
+		});
+
+	});
+} // respond( )
+
+var server = restify.createServer();
+server.use(restify.CORS());
+server.get('/:item/:action', respond);
+server.post('/:item/:action', respond);
+
+server.listen(8080, function() {
+	console.log('%s listening at %s', server.name, server.url);
 });
 
-// start WebSocket server
-var wsServer = new Ws.Server({ server: httpServer });
-
-// accept incoming WebSockets connections
-wsServer.on('connection', function (ws) {
-	console.log('new incoming WebSocket connection');
-
-	ws.on('message', function incoming(message) {
-		console.log('received: %s', message);
-	});
-
-	var stream = new Swarm.EinarosWSStream(ws);
-	stream.on('data', function(msg) {
-		console.log('stream data: ' + msg);
-	});
-	swarmHost.accept(stream);
-});
+// equity-item/by-list
+// equity-item/new
+// equity-item/patch

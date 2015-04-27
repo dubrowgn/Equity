@@ -26,8 +26,10 @@
   },
   "dependencies": {
     "immutable": "^3.7.0",
-    "riot": "^2.0.13",
-    "underscore": "^1.8.2"
+    "lodash": "^3.7.0",
+    "moment": "^2.10.2",
+    "restify": "^3.0.1",
+    "riot": "^2.0.13"
   },
   "devDependencies": {
     "riotify": "0.0.9"

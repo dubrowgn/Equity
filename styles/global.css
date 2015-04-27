@@ -77,12 +77,26 @@ footer {
 	text-align: right;
 }
 
-.btn-trash {
+/* buttons */
+.btn {
 	color: #999;
 	cursor: pointer;
+}
+.btn:hover {
+	color: #0080ff;
+}
+
+.add {
+	float: right;
+}
+.add:hover {
+	color: #6AA84F;
+}
+
+.trash {
 	margin-bottom: 3px;
 }
-.btn-trash:hover {
+.trash:hover {
 	color: #d00;
 }
 

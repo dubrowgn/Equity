@@ -27,5 +27,8 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
+# Config directory
+config
+
 # Dist directory
 dist

@@ -1,6 +1,6 @@
 <textbox>
 	<input type="text" class="textbox" oninput={ input } onblur={ blur } onkeyup={ keypress } value={ v } />
-	<div class="textbox w-sizer">{v}</div>
+	<div class="textbox w-sizer">{ v }</div>
 
 	this.v = opts.value;
 
